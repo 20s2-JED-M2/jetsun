@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package sg.edu.nyp.am;
+package sg.edu.nyp.entities;
 
 import java.util.Date;
 
