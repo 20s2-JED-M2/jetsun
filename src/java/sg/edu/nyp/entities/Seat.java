@@ -2,7 +2,7 @@ package sg.edu.nyp.entities;
 
 import java.io.Serializable;
 
-class Seat implements Serializable {
+public class Seat implements Serializable {
     private static final long serialVersionUID = -1L;
     private int Id;
     private String seatNum;
