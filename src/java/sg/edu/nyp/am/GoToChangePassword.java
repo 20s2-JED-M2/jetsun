@@ -7,15 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/pastbookings")
-public class PastBookingServlet extends HttpServlet {
+@WebServlet("/gotochangepassword")
+public class GoToChangePassword extends HttpServlet {
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         
         // simple test
-        response.sendRedirect(this.getServletContext().getContextPath() + "/pastBookings.jsp");
+        response.sendRedirect(this.getServletContext().getContextPath() + "/changePassword.jsp");
     }
 }
