@@ -17,7 +17,6 @@
         <form action="search" method="post">
             <p>Please enter your destination: <input type="text" name="des"/><br/></p>
             <p>Please enter your departure: <input type="text" name="dep"/><br/></p>
-            <p>Please enter your departure date: <input type="text" name="depdate"/><br/>
             <input type="submit" value="Search"/>
             <br/></p>
         </form>
