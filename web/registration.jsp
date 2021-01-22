@@ -14,7 +14,7 @@
     <body>
 
         <h1>Registration Form</h1>
-        <form name="register" action="add" method="post">
+        <form name="register" action="register" method="post">
 
             <p>
                 <font color="red">
@@ -36,7 +36,7 @@
             Mobile No*: <input type="text" name="mobilePhone" required /><br/>
             
             <p>Billing address is required if x reason is needed</p>
-            Billing Address: <input type="text" name="billingadd"  />
+            Billing Address: <input type="text" name="billingAdd"  />
             <br/>
             <br/>
             
