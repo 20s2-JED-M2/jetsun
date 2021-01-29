@@ -1,6 +1,7 @@
 package sg.edu.nyp.am;
 
 import java.io.IOException;
+import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,8 @@ public class GoToChangePassword extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
+        request.getSession().setAttribute("NRIC", "123213");
+                
         // simple test
         response.sendRedirect(this.getServletContext().getContextPath() + "/changePassword.jsp");
     }

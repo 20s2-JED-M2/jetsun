@@ -10,10 +10,10 @@
     <body>
         <h1>Change your password</h1><hr><br>
         <div class="changepassword">
-            <form action="changepassword" method="post">
-                Old Password: <input type="text" name="oldpassword" id="oldpassword"><br>
-                New Password: <input type="text" name="newpassword" id="newpassword"><br>
-                Confirm New Password: <input type="text" name="cfmnewpassword" id="cfmnewpassword"><br><br>
+            <form action="validatepassword" method="post"> 
+                Old Password: <input type="text" name="oldpassword" id="oldpassword" required=""><br>
+                New Password: <input type="text" name="newpassword" id="newpassword" required><br>
+                Confirm New Password: <input type="text" name="cfmnewpassword" id="cfmnewpassword" required><br><br>
                 <input type="submit" value="Change Password">
             </form>
         </div>
