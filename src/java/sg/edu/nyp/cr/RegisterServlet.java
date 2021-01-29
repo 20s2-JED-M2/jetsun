@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sg.edu.nyp.entities.Customer;
 
 /**
  *
@@ -45,7 +46,7 @@ public class RegisterServlet extends HttpServlet {
         
         
         Customer customer = customerBean.register(nricNo, title, name, email, homeAdd, passportNo, passportExpiry, mobilePhone, billingAdd, dob, officePhone, homePhone, krisFlyer, password);
-
+        response.sendRedirect(this.getServletContext().getContextPath() + "/login.jsp");
     }
 
 }

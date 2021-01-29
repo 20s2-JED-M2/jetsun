@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
+import sg.edu.nyp.entities.Customer;
 
 /**
  *
@@ -50,7 +51,7 @@ public class CustomerBean {
             if(!resultset.first()) {
                 String sqladd = "INSERT INTO customer "
                         + "(nricNo, title, name, email, homeAdd, passportNo, passportExpiry, mobilePhone, billingAdd, dob, officePhone, homePhone, krisFlyer, password)"
-                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SHA2(?,256));";
                 preparedStatement = connection.prepareStatement(sqladd);
                 preparedStatement.setString(1, nricNo);
                 preparedStatement.setString(2, title);
@@ -101,4 +102,71 @@ public class CustomerBean {
         return customer;
     }
     
+    public Customer login(String email, String password)
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultset = null;
+        
+        Customer customer = new Customer();
+        
+        String sqlselect = "SELECT * FROM customer WHERE email = ? AND password = SHA2(?,256)";
+        
+        try {
+            connection = dsCustomerCatalogue.getConnection();
+            preparedStatement = connection.prepareStatement(sqlselect);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            System.out.println(preparedStatement);
+            
+            resultset = preparedStatement.executeQuery();
+            
+            if(resultset.first()) {
+                customer.setName(resultset.getString("name"));
+                customer.setNricNo(resultset.getString("nricNo"));
+                customer.setTitle(resultset.getString("title"));
+                customer.setEmail(resultset.getString("email"));
+                customer.setHomeAdd(resultset.getString("homeAdd"));
+                customer.setBillingAdd(resultset.getString("billingAdd"));
+                customer.setPassportNo(resultset.getString("passportNo"));
+                customer.setPassportExpiry(resultset.getDate("passportExpiry"));
+                customer.setMobilePhone(resultset.getString("mobilePhone"));
+                customer.setDob(resultset.getDate("dob"));
+                customer.setOfficePhone(resultset.getString("officePhone"));
+                customer.setHomePhone(resultset.getString("homePhone"));
+                customer.setKrisFlyer(resultset.getString("krisFlyer"));
+                customer.setPassword(resultset.getString("password"));
+                System.out.println(resultset.getString("name"));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerBean.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(resultset != null) {
+                try {
+                    resultset.close();
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(connection != null) {
+                try {
+                    connection.close();
+                } 
+                catch (SQLException ex) {
+                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return customer;
+    }
 }
