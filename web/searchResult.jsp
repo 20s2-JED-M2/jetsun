@@ -33,14 +33,21 @@
                     } else {
                         for(Flight flight : searchResult) {
                 %>
+                <form name="searchflightresult" action="searchresult">
                 <tr>
                     <td><%=flight.getFlightCode()%></td>
+                    <input type = "hidden" value="<%=flight.getFlightCode()%>"> 
                     <td><%=flight.getDeparture()%></td>
+                    <input type = "hidden" value="<%=flight.getDeparture()%>"> 
                     <td><%=flight.getDepartureDate()%></td>
+                    <input type = "hidden" value="<%=flight.getDepartureDate()%>"> 
                     <td><%=flight.getDestination()%></td>
+                    <input type = "hidden" value="<%=flight.getDestination()%>"> 
                     <td><%=flight.getFlightVacancy()%></td>
+                    <input type = "hidden" value="<%=flight.getFlightVacancy()%>"> 
                     <td><input type="submit" value="Book Flight"></td>
                 </tr>
+                </form>
                 <%
                         }
                     }
@@ -49,6 +56,7 @@
         </p>
         <hr/>
         <a href="searchFlight.jsp">Do another search</a><br/>
+        
         <a href="index.html">Go back to menu</a>
     </body>
 </html> 
