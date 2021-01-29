@@ -26,6 +26,13 @@ import javax.sql.DataSource;
 public class FlightBean {
     @Resource(name="jdbc/project")
     private DataSource dsFlightManagement;
+    
+    private String nricNo;
+    private int flightCode;
+    private int seatId;
+    private int employeeId;
+    private Date timestamp;
+    
     public List<Flight> searchFlight(String departure, String destination){
         List<Flight> flightList = new ArrayList<Flight>();
         //Declare the connection, statement and resultset objects
@@ -107,4 +114,77 @@ public class FlightBean {
         }
         return flightList;
     }
+    
+    public boolean addBooking(String nricNo, int flightCode, int seatId, String employeeId, Date timestamp){
+        //Declare the connection, statement and resultset objects
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultset = null;
+     
+        try {
+            //Initialise the connection, statement and resultset 
+
+            // Get the connection from the DataSource 
+            connection = dsFlightManagement.getConnection();
+		// Create a Statement using the Connection
+            statement = connection.createStatement();
+            PreparedStatement preparedStatement = null;
+            PreparedStatement preparedStatement2 = null;
+            
+            preparedStatement = connection.prepareStatement("INSERT INTO (booking nricNo, flightCode, seatId, employeeId, timestamp) values (?, ?, ?, ?, ?)");
+            preparedStatement.setString(1, nricNo);
+            preparedStatement.setInt(2, flightCode);
+            preparedStatement.setInt(3, seatId);
+            preparedStatement.setString(4, employeeId);
+            preparedStatement.setDate(5, timestamp);
+            
+            preparedStatement.executeUpdate();
+            
+            preparedStatement2 = connection.prepareStatement("UPDATE flight set flightVacancy = flightVacancy - 1 where flightCode = ?");
+            preparedStatement2.setInt(1, flightCode);
+            
+            preparedStatement2.executeUpdate();
+            
+            return true;
+            
+        } catch(SQLException ex) {
+            //Usually, the error should be logged somewhere in the system log.
+            //Sometimes, users may also need to be notified regarding such error
+            ex.printStackTrace();
+            System.err.println(ex.getMessage());
+            
+            return false;
+            
+        } finally {
+            //Resultset, Statement and Connection are closed in the finally 
+            // clause to ensure that they will be closed no matter what 
+            // happens to the system.
+            if(resultset != null) {
+                try {
+                    resultset.close();
+                } catch(SQLException ex) {
+                    ex.printStackTrace();
+                    System.err.println(ex.getMessage());
+                }
+            }
+            if(statement != null) {
+                try {
+                    statement.close();
+                } catch(SQLException ex) {
+                    ex.printStackTrace();
+                    System.err.println(ex.getMessage());
+                }
+            }
+            if(connection != null) {
+                try {
+                    connection.close();
+                } catch(SQLException ex) {
+                    ex.printStackTrace();
+                    System.err.println(ex.getMessage());
+                }
+            }
+        }
+    }
+    
+    
 }
