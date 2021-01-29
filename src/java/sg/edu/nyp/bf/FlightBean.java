@@ -17,6 +17,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
+import sg.edu.nyp.entities.Seat;
 
 @Stateless
 /**
@@ -184,6 +185,80 @@ public class FlightBean {
                 }
             }
         }
+    }
+    
+     public List<Seat> getSeats(){
+        List<Seat> flightSeats = new ArrayList<Seat>();
+        //Declare the connection, statement and resultset objects
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultset = null;
+     
+        try {
+            //Initialise the connection, statement and resultset 
+	
+		// Get the connection from the DataSource 
+            connection = dsFlightManagement.getConnection();
+		// Create a Statement using the Connection
+            statement = connection.createStatement();
+            PreparedStatement preparedStatement = null;
+            
+            preparedStatement = connection.prepareStatement("SELECT * FROM seat");
+            // Make a query to the DB using ResultSet through the Statement
+ 
+            resultset = preparedStatement.executeQuery();
+                                    
+            //Rertieve all records from the resultset
+            while(resultset.next()) {
+                //Create a Book object
+                Seat seat = new Seat();
+                
+                //Retrieve flightcode from the resultset and store it in flight
+                int seatid = resultset.getInt("id");
+                String seatNum = resultset.getString("seatNum");
+                
+                seat.setId(seatid );
+                seat.setSeatNum(seatNum);
+               
+                flightSeats.add(seat);
+            }
+            
+            return flightSeats;
+        } catch(SQLException ex) {
+            //Usually, the error should be logged somewhere in the system log.
+            //Sometimes, users may also need to be notified regarding such error
+            ex.printStackTrace();
+            System.err.println(ex.getMessage());
+        } finally {
+            //Resultset, Statement and Connection are closed in the finally 
+            // clause to ensure that they will be closed no matter what 
+            // happens to the system.
+            if(resultset != null) {
+                try {
+                    resultset.close();
+                } catch(SQLException ex) {
+                    ex.printStackTrace();
+                    System.err.println(ex.getMessage());
+                }
+            }
+            if(statement != null) {
+                try {
+                    statement.close();
+                } catch(SQLException ex) {
+                    ex.printStackTrace();
+                    System.err.println(ex.getMessage());
+                }
+            }
+            if(connection != null) {
+                try {
+                    connection.close();
+                } catch(SQLException ex) {
+                    ex.printStackTrace();
+                    System.err.println(ex.getMessage());
+                }
+            }
+        }
+        return null;
     }
     
     

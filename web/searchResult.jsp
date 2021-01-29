@@ -33,18 +33,18 @@
                     } else {
                         for(Flight flight : searchResult) {
                 %>
-                <form name="searchflightresult" action="searchresult">
+                <form name="searchflightresult" action="searchresult" method="post">
                 <tr>
                     <td><%=flight.getFlightCode()%></td>
-                    <input type = "hidden" value="<%=flight.getFlightCode()%>"> 
+                    <input type = "hidden" name="flightCode" value="<%=flight.getFlightCode()%>"> 
                     <td><%=flight.getDeparture()%></td>
-                    <input type = "hidden" value="<%=flight.getDeparture()%>"> 
+                    <input type = "hidden" name="departure" value="<%=flight.getDeparture()%>"> 
                     <td><%=flight.getDepartureDate()%></td>
-                    <input type = "hidden" value="<%=flight.getDepartureDate()%>"> 
+                    <input type = "hidden" name="departureDate" value="<%=flight.getDepartureDate()%>"> 
                     <td><%=flight.getDestination()%></td>
-                    <input type = "hidden" value="<%=flight.getDestination()%>"> 
+                    <input type = "hidden" name="destination" value="<%=flight.getDestination()%>"> 
                     <td><%=flight.getFlightVacancy()%></td>
-                    <input type = "hidden" value="<%=flight.getFlightVacancy()%>"> 
+                    <input type = "hidden" name="flightVacancy" value="<%=flight.getFlightVacancy()%>"> 
                     <td><input type="submit" value="Book Flight"></td>
                 </tr>
                 </form>

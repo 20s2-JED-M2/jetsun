@@ -4,6 +4,7 @@
     Author     : 181361M
 --%>
 
+<%@page import="sg.edu.nyp.entities.Seat"%>
 <%@page import="sg.edu.nyp.bf.Booking"%>
 <%@page import="sg.edu.nyp.bf.Flight"%>
 <%@page import="java.util.List"%>
@@ -19,29 +20,27 @@
             validation is needed for  seating--%>
         <h3>Your Selection</h3>
             <%
-                Flight flight = (Flight)session.getAttribute("flight");      
+                Flight flight = (Flight)session.getAttribute("flight");  
+                List<Seat> listSeat = (List<Seat>) session.getAttribute("seatlist");  
             %>
         <form action="addseat" method="post">
-            <%
-                 %>
                 <input type="hidden" name="nric" value="<%=session.getAttribute("nricno")%>">
             <p>
-                Selected Flight No.: <%=flight.getFlightCode()%>
-                Selected Departure: <%=flight.getDeparture()%>
-                Selected Departure Date: <%=flight.getDepartureDate()%>
-                Selected Destination: <%=flight.getDestination()%>
+                Selected Flight No.: <%=flight.getFlightCode()%><br>
+                Selected Departure: <%=flight.getDeparture()%><br>
+                Selected Departure Date: <%=flight.getDepartureDate()%><br>
+                Selected Destination: <%=flight.getDestination()%><br>
                 Select a seat: <select name="seat" required>
-                    <c:forEach items="${listSeat}" var="seat">
-                        <option value="${seat.id}">${seat.seatNum}></option>
-                    </c:forEach>
-                </select>
-                   <%
-                   %>
-                   <input type = "hidden" name="Fcode" value="<%=flight.getFlightCode()%>">                 
-                          <%
+                    <%
+                     for(Seat seat : listSeat) {
+                    %>
+                    <option value="<%=seat.getId()%>"><%=seat.getSeatNum()%></option>
+                    <%
                         }
-                    }
                 %>
+                    
+                </select><br>
+                   <input type = "hidden" name="Fcode" value="<%=flight.getFlightCode()%>">                 
             </p>
             <input type="submit" value="Confirm Flight">
         </form>
