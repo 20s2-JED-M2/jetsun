@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import sg.edu.nyp.entities.Customer;
 
 /**
  *
@@ -28,10 +29,15 @@ public class BookFlightServlet extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         //Retrieve parameters
-        String nricNo =  request.getParameter("nricNo");
-        int flightCode = Integer.parseInt(request.getParameter("flightCode"));
+        HttpSession session = request.getSession();
+        //Customer customer = (Customer)session.getAttribute("customer");
+        //customer.getNricNo();
+        
+        
+        String nricNo = "S1234123A";
+        int flightCode = Integer.parseInt(request.getParameter("Fcode"));
         //int seatNum = Integer.parseInt(request.getParameter("seatNum"));
-        int seatId = Integer.parseInt(request.getParameter("seatId"));
+        int seatId = Integer.parseInt(request.getParameter("seat"));
         String employeeId = null;
         java.sql.Date timestamp = new java.sql.Date(System.currentTimeMillis());
         Boolean bool;
