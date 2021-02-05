@@ -21,5 +21,8 @@
         <form action="gotochangepassword" method="get">
             <input type="submit" value="Go To Change Password">
         </form>
+        <form action="logout" method="post">
+	    <input type="submit" value="Log Out"/>
+	</form>
     </body>
 </html>
