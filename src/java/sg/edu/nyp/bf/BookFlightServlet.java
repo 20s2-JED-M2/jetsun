@@ -21,39 +21,37 @@ import sg.edu.nyp.entities.Customer;
  * @author 182281M
  */
 @WebServlet("/addseat")
-public class BookFlightServlet extends HttpServlet{
+public class BookFlightServlet extends HttpServlet {
+
     @EJB
     private FlightBean flightBean;
-    
-    @Override 
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            throws ServletException, IOException {
         //Retrieve parameters
         HttpSession session = request.getSession();
-        //Customer customer = (Customer)session.getAttribute("customer");
-        //customer.getNricNo();
-        
-        String nric = (String) request.getSession().getAttribute("NRIC");
-        int flightCode = Integer.parseInt(request.getParameter("Fcode"));
-        //int seatNum = Integer.parseInt(request.getParameter("seatNum"));
-        int seatId = Integer.parseInt(request.getParameter("seat"));
-        String employeeId = null;
-        java.sql.Date timestamp = new java.sql.Date(System.currentTimeMillis());
-        Boolean bool;
-        
-        bool = flightBean.addBooking(nric, flightCode, seatId, employeeId, timestamp);
-        
-        if(bool == true){
-            
-             response.sendRedirect(this.getServletContext().getContextPath() + "/menu.jsp");
-//            HttpSession session = request.getSession();
-//            session.setAttribute("flightCode", flightCode);
-//             session.setAttribute("seat", seatId);
-//            response.sendRedirect(this.getServletContext().getContextPath() + "/checkout.jsp");
-            
-        }
-        else{
-            response.sendRedirect(this.getServletContext().getContextPath() + "/searchFlight.jsp");
+        Customer customer = (Customer) session.getAttribute("customer");
+        if (customer == null) {
+                 response.sendRedirect(this.getServletContext().getContextPath() + "/index.html");
+        } else {
+            String nricNo = customer.getNricNo();
+            int flightCode = Integer.parseInt(request.getParameter("Fcode"));
+            //int seatNum = Integer.parseInt(request.getParameter("seatNum"));
+            int seatId = Integer.parseInt(request.getParameter("seat"));
+            String employeeId = null;
+            java.sql.Date timestamp = new java.sql.Date(System.currentTimeMillis());
+            Boolean bool;
+
+            bool = flightBean.addBooking(nricNo, flightCode, seatId, employeeId, timestamp);
+
+            if (bool == true) {
+
+                response.sendRedirect(this.getServletContext().getContextPath() + "/menu.jsp");
+
+            } else {
+                response.sendRedirect(this.getServletContext().getContextPath() + "/searchFlight.jsp");
+            }
         }
 
     }
