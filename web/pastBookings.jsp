@@ -26,40 +26,28 @@
                     <td>Seat No</td>
                     <td>Timestamp</td>
                 </tr>
-                <tr>
                 <%
                     List<Booking> retrieveBookings = (List<Booking>) session.getAttribute("booking");                    
                     List<Seat> retrieveSeats = (List<Seat>) session.getAttribute("seat");
                     List<Customer> retrieveCustomers = (List<Customer>) session.getAttribute("customer");
                     List<Flight> retrieveFlights = (List<Flight>) session.getAttribute("flight");
                   
-                    for (Customer customer : retrieveCustomers) {
+                    for (int index = 0; index < retrieveCustomers.size(); index++) {
                 %>
-                    <td><%=customer.getNricNo()%></td>
-                    <td><%=customer.getName()%></td>
-                    <td><%=customer.getPassportNo()%></td>
-                <%
-                }
-                    for (Flight flight : retrieveFlights) {
-                %>
-                    <td><%=flight.getFlightcode()%></td>
-                    <td><%=flight.getDeparture()%></td>
-                    <td><%=flight.getDestination()%></td>
-                    <td><%=flight.getDepartureDate()%></td>
-                <%
-                }
-                    for (Seat seat : retrieveSeats) {
-                %>
-                    <td><%=seat.getSeatNum()%></td>
-                <%
-                }
-                    for (Booking booking : retrieveBookings) {
-                %>
-                    <td><%=booking.getTimestamp()%></td>
+                <tr>
+                    <td><%=retrieveCustomers.get(index).getNricNo()%></td>
+                    <td><%=retrieveCustomers.get(index).getName()%></td>
+                    <td><%=retrieveCustomers.get(index).getPassportNo()%></td>
+                    <td><%=retrieveFlights.get(index).getFlightcode()%></td>
+                    <td><%=retrieveFlights.get(index).getDeparture()%></td>
+                    <td><%=retrieveFlights.get(index).getDestination()%></td>
+                    <td><%=retrieveFlights.get(index).getDepartureDate()%></td>
+                    <td><%=retrieveSeats.get(index).getSeatNum()%></td>
+                    <td><%=retrieveBookings.get(index).getTimestamp()%></td>
+                    </tr>
                 <%
                 } 
                 %>
-                </tr>
             </table>
         </div>
         <br><hr><br>

@@ -24,7 +24,7 @@
                 List<Seat> listSeat = (List<Seat>) session.getAttribute("seatlist");  
             %>
         <form action="addseat" method="post">
-                <input type="hidden" name="nric" value="<%=session.getAttribute("nricno")%>">
+                <input type="hidden" name="nric" value="<%=session.getAttribute("NRIC")%>">
             <p>
                 Selected Flight No.: <%=flight.getFlightCode()%><br>
                 Selected Departure: <%=flight.getDeparture()%><br>

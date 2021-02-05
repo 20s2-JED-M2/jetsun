@@ -33,8 +33,7 @@ public class BookFlightServlet extends HttpServlet{
         //Customer customer = (Customer)session.getAttribute("customer");
         //customer.getNricNo();
         
-        
-        String nricNo = "S1234123A";
+        String nric = (String) request.getSession().getAttribute("NRIC");
         int flightCode = Integer.parseInt(request.getParameter("Fcode"));
         //int seatNum = Integer.parseInt(request.getParameter("seatNum"));
         int seatId = Integer.parseInt(request.getParameter("seat"));
@@ -42,11 +41,11 @@ public class BookFlightServlet extends HttpServlet{
         java.sql.Date timestamp = new java.sql.Date(System.currentTimeMillis());
         Boolean bool;
         
-        bool = flightBean.addBooking(nricNo, flightCode, seatId, employeeId, timestamp);
+        bool = flightBean.addBooking(nric, flightCode, seatId, employeeId, timestamp);
         
         if(bool == true){
             
-             response.sendRedirect(this.getServletContext().getContextPath() + "/index.html");
+             response.sendRedirect(this.getServletContext().getContextPath() + "/menu.jsp");
 //            HttpSession session = request.getSession();
 //            session.setAttribute("flightCode", flightCode);
 //             session.setAttribute("seat", seatId);

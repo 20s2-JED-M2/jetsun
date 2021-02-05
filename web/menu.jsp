@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Welcome, <%=request.getSession().getAttribute("Name")%></h1>
-        <a href='bookFlight.jsp'>Book Flight</a>
+        <a href="searchFlight.jsp">Search Flight</a>
                 <form action="pastbookings" method="POST">
             <input type="submit" value="View Past Bookings">
         </form>
