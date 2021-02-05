@@ -15,7 +15,10 @@ public class GoToChangePassword extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        request.getSession().setAttribute("NRIC", "123213");
+        // retrieve NRIC from session
+        String nric = (String) request.getSession().getAttribute("NRIC");
+        
+        request.getSession().setAttribute("customerNRIC", nric);
                 
         // simple test
         response.sendRedirect(this.getServletContext().getContextPath() + "/changePassword.jsp");

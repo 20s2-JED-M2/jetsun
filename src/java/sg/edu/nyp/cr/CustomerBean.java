@@ -169,4 +169,64 @@ public class CustomerBean {
         }
         return customer;
     }
+    
+    public String getNRIC(String email) {
+        
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultset = null;
+        
+        String customerNRIC = "";
+        
+        // get NRIC from db
+        String sqlselect = "SELECT nricNo FROM customer WHERE email = ?";
+        
+        try {
+            connection = dsCustomerCatalogue.getConnection();
+            preparedStatement = connection.prepareStatement(sqlselect);
+            preparedStatement.setString(1, email);
+            System.out.println(preparedStatement);
+            
+            resultset = preparedStatement.executeQuery();
+            
+            resultset.next();
+            
+            customerNRIC = resultset.getString("nricNo");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return customerNRIC;
+    }
+    
+    public String getname(String nric) {
+        
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultset = null;
+        
+        String customerName = "";
+        
+        // get NRIC from db
+        String sqlselect = "SELECT name FROM customer WHERE nricNo = ?";
+        
+        try {
+            connection = dsCustomerCatalogue.getConnection();
+            preparedStatement = connection.prepareStatement(sqlselect);
+            preparedStatement.setString(1, nric);
+            System.out.println(preparedStatement);
+            
+            resultset = preparedStatement.executeQuery();
+            
+            resultset.next();
+            
+            customerName = resultset.getString("name");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return customerName;
+    }
 }
