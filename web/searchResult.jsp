@@ -57,7 +57,7 @@
         <hr/>
         <a href="searchFlight.jsp">Do another search</a><br/>
         
-        <a href="index.html">Go back to menu</a>
+        <a href="menu.jsp">Go back to menu</a>
     </body>
 </html> 
 

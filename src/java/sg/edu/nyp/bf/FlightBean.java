@@ -132,13 +132,13 @@ public class FlightBean {
             PreparedStatement preparedStatement = null;
             PreparedStatement preparedStatement2 = null;
             
-            preparedStatement = connection.prepareStatement("INSERT INTO (booking nricNo, flightCode, seatId, employeeId, timestamp) values (?, ?, ?, ?, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO booking (nricNo, flightCode, seatId, employeeId, timestamp) values (?, ?, ?, ?, ?)");
             preparedStatement.setString(1, nricNo);
             preparedStatement.setInt(2, flightCode);
             preparedStatement.setInt(3, seatId);
             preparedStatement.setString(4, employeeId);
             preparedStatement.setDate(5, timestamp);
-            
+            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
             
             preparedStatement2 = connection.prepareStatement("UPDATE flight set flightVacancy = flightVacancy - 1 where flightCode = ?");

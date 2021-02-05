@@ -12,7 +12,14 @@
         <title>Menu</title>
     </head>
     <body>
-        <h1>Menu</h1>
-        <a href='bookFlight.jsp'>Book Flight</a>
+        <h1>Welcome, <%=request.getSession().getAttribute("Name")%></h1>
+        <a href="searchFlight.jsp">Search Flight</a>
+                <form action="pastbookings" method="POST">
+            <input type="submit" value="View Past Bookings">
+        </form>
+        <!-- Temporary redirecting to Change Password page, to be removed afterwards -->
+        <form action="gotochangepassword" method="get">
+            <input type="submit" value="Go To Change Password">
+        </form>
     </body>
 </html>

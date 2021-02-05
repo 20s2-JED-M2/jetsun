@@ -23,18 +23,7 @@ public class PastBookingServlet extends HttpServlet {
         
         List<Object> verifyResult;
         
-        request.getSession().setAttribute("nricNo", "123213");
-        
-        verifyResult = bookingBean.retrieveBookings(request.getSession().getAttribute("nricNo").toString());
-        
-//        for (int i=0; i<verifyResult.size() ; i++) {
-//            System.out.println(verifyResult.get(i));
-//        }
-        System.out.println(verifyResult.get(0));        
-        System.out.println(verifyResult.get(1));
-        System.out.println(verifyResult.get(2));
-        System.out.println(verifyResult.get(3));
-
+        verifyResult = bookingBean.retrieveBookings(request.getSession().getAttribute("NRIC").toString());
 
         request.getSession().setAttribute("booking", verifyResult.get(0));        
         request.getSession().setAttribute("seat", verifyResult.get(1));

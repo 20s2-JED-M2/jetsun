@@ -11,13 +11,13 @@
         <h1>Change your password</h1><hr><br>
         <div class="changepassword">
             <form action="validatepassword" method="post"> 
-                Old Password: <input type="text" name="oldpassword" id="oldpassword" required=""><br>
-                New Password: <input type="text" name="newpassword" id="newpassword" required><br>
-                Confirm New Password: <input type="text" name="cfmnewpassword" id="cfmnewpassword" required><br><br>
+                Old Password: <input type="password" name="oldpassword" id="oldpassword" required><br>
+                New Password: <input type="password" name="newpassword" id="newpassword" required><br>
+                Confirm New Password: <input type="password" name="cfmnewpassword" id="cfmnewpassword" required><br><br>
                 <input type="submit" value="Change Password">
             </form>
         </div>
         <br><hr><br>
-        <a href="index.html">Back to index</a>
+        <a href="menu.jsp">Back to menu</a>
     </body>
 </html>

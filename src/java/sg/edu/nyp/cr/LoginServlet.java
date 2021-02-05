@@ -36,11 +36,15 @@ public class LoginServlet extends HttpServlet {
         } else {
             String email = (String)request.getParameter("email");
             String password = (String)request.getParameter("password");
-
+            
             Customer customer = customerBean.login(email, password);
+            String customerNRIC = customerBean.getNRIC(email);
+            String customerName = customerBean.getname(customerNRIC);
 
             if(customer.getName() != null) {
                 session.setAttribute("customer", customer);
+                session.setAttribute("NRIC", customerNRIC);
+                session.setAttribute("Name", customerName);
                 response.sendRedirect(this.getServletContext().getContextPath() + "/menu.jsp");
             } else {
                 session.setAttribute("errormessage", "Login fail!");
