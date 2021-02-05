@@ -63,6 +63,6 @@
             </table>
         </div>
         <br><hr><br>
-        <a href="index.html">Back to index</a>
+        <a href="menu.jsp">Back to menu</a>
     </body>
 </html>

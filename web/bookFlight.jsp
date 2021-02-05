@@ -44,6 +44,6 @@
             </p>
             <input type="submit" value="Confirm Flight">
         </form>
-            <a href="index.html">Go back to menu</a>
+            <a href="menu.jsp">Go back to menu</a>
     </body>
 </html>

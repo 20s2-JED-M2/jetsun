@@ -39,7 +39,7 @@ public class ChangePasswordServlet extends HttpServlet {
             pw.println("<script type=\"text/javascript\">");
             pw.println("alert('Your password has been changed!');");
             pw.println("</script>");
-            RequestDispatcher rd=request.getRequestDispatcher("index.html");
+            RequestDispatcher rd=request.getRequestDispatcher("menu.jsp");
             rd.include(request, response);
         } 
         else {

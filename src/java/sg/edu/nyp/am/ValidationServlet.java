@@ -37,14 +37,12 @@ public class ValidationServlet extends HttpServlet {
         Boolean passwordValidateOldPass;
         Boolean passwordValidateNewPass;
 
-        System.out.println("Comparing user input old pass hash with old pass hash from db");
         // call EJB to connect with DB and use if statement to comapre
         passwordValidateOldPass = passwordBean.compareoldPass(nric, oldpass);
 
         // if old pass from db matches with user input old pass
         if (passwordValidateOldPass.equals(true)) 
         {
-            System.out.println("Comparing new pass with confirm new pass");
             passwordValidateNewPass = passwordBean.compareNewPass(newpass, cmfnewpass);
             
             // if new pass matches with cmf new pass

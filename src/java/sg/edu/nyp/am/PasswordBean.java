@@ -37,7 +37,6 @@ public class PasswordBean {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             String dboldpass = resultSet.getString("password");
-            System.out.println("This is db old pass: " + dboldpass);
             
             //Hash olduserpass
             String securePassword = olduserpass;

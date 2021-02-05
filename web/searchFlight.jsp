@@ -20,6 +20,6 @@
             <input type="submit" value="Search"/>
             <br/></p>
         </form>
-        <a href="index.html">Back</a>
+        <a href="menu.jsp">Back</a>
     </body>
 </html>

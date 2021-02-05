@@ -32,14 +32,12 @@ public class BookingBean {
         List<Customer> retrieveCustomers = new ArrayList<>();
         
         String sqlSelect = "select b.nricNo, c.name, c.passportNo, f.flightCode, b.timestamp, f.departure, f.destination, f.departureDate, s.seatNum from booking b join flight f on b.flightCode = f.flightCode join seat s on b.seatId = s.Id join customer c on b.nricNo = c.nricNo where b.nricNo = ?";
-        
-            System.out.println(nricNo);
+
         try {
             connection = collabproject.getConnection();
             
             preparedStatement = connection.prepareStatement(sqlSelect);
             preparedStatement.setString(1, nricNo);
-            System.out.println(preparedStatement);
             resultset = preparedStatement.executeQuery();
             
             while (resultset.next()) {
@@ -61,9 +59,7 @@ public class BookingBean {
                 retrieveBookings.add(booking);
                 retrieveSeats.add(seat);
                 retrieveCustomers.add(customer);
-                retrieveFlights.add(flight);
-//                System.out.println(preparedStatement);
-                
+                retrieveFlights.add(flight);       
                 retrieveValues.add(retrieveBookings);                
                 retrieveValues.add(retrieveSeats);
                 retrieveValues.add(retrieveCustomers);                
