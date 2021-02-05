@@ -8,7 +8,7 @@ public class Flight implements Serializable {
     private int flightcode;
     private String departure;
     private String destination;
-    private Seat departureDate;
+    private Date departureDate;
     private int flightVacancy;
     private String employeeId;
 
@@ -36,11 +36,11 @@ public class Flight implements Serializable {
         this.destination = destination;
     }
 
-    public Seat getDepartureDate() {
+    public Date getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Seat departureDate) {
+    public void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
     }
 

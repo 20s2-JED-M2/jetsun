@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sg.edu.nyp.entities.Booking;
 import sg.edu.nyp.entities.Customer;
 
 @WebServlet("/pastbookings")
@@ -20,17 +21,26 @@ public class PastBookingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        List<Object> verifyResult;
         
-        String nricNo = null;
-        String flightCode;
-        int seatId;
+        request.getSession().setAttribute("nricNo", "123213");
         
-        List<Customer> verifyResult;
+        verifyResult = bookingBean.retrieveBookings(request.getSession().getAttribute("nricNo").toString());
         
-        verifyResult = bookingBean.verifyNricNo(nricNo);
-        //Rusyda and Spelmen Continue from here next week
+//        for (int i=0; i<verifyResult.size() ; i++) {
+//            System.out.println(verifyResult.get(i));
+//        }
+        System.out.println(verifyResult.get(0));        
+        System.out.println(verifyResult.get(1));
+        System.out.println(verifyResult.get(2));
+        System.out.println(verifyResult.get(3));
+
+
+        request.getSession().setAttribute("booking", verifyResult.get(0));        
+        request.getSession().setAttribute("seat", verifyResult.get(1));
+        request.getSession().setAttribute("customer", verifyResult.get(2));
+        request.getSession().setAttribute("flight", verifyResult.get(3));
         
-        // simple test
         response.sendRedirect(this.getServletContext().getContextPath() + "/pastBookings.jsp");
     }
 }
